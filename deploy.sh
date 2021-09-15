@@ -5,7 +5,8 @@
 
 dockerRepo=`aws ecr describe-repositories --repository-name ai-insight-demo --region ap-south-1 | grep repositoryUri | cut -d "\"" -f 4`
 dockerTag=`aws ecr list-images --repository-name ai-insight-demo --region ap-south-1 | grep imageTag | head -n 1 | cut -d "\"" -f 4`
-sed -e "s;DOCKER_IMAGE_NAME;${repositoryURI};g" template.json > taskDefinition.json
+#sed -e "s;DOCKER_IMAGE_NAME;${repositoryURI};g" template.json > taskDefinition.json
+sed -e "s;DOCKER_IMAGE_NAME;${dockerRepo};g" template.json > taskDefinition.json
 echo "I am here"
 echo $DOCKER_IMAGE_NAME
 aws ecs register-task-definition --family ai-insight-jenkins --cli-input-json file://taskDefinition.json --region ap-south-1
