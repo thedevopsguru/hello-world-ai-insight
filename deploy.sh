@@ -8,7 +8,6 @@ dockerTag=`aws ecr list-images --repository-name ai-insight-demo --region ap-sou
 #sed -e "s;DOCKER_IMAGE_NAME;${repositoryURI};g" template.json > taskDefinition.json
 #sed -e "s;DOCKER_IMAGE_NAME;${dockerRepo};g" template.json > taskDefinition.json
 echo "I am here"
-echo $DOCKER_IMAGE_NAME
 aws ecs register-task-definition --family ai-insight-jenkins --cli-input-json file://taskDefinition.json --region ap-south-1
-revision=`aws ecs describe-task-definition --task-definition ai-insight-jenkins --region ap-south-1 | grep "revision" | tr -s " " | cut -d " " -f 3`
+revision=`aws ecs describe-task-definition --task-definition ai-insight-jenkins --region ap-south-1 | grep "revision" | tr -s " " | cut -d " " -f 3|tr ',' ' '`
 aws ecs update-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
