@@ -10,4 +10,6 @@ dockerTag=`aws ecr list-images --repository-name ai-insight-demo --region ap-sou
 echo "I am here"
 aws ecs register-task-definition --family ai-insight-jenkins --cli-input-json file://taskDefinition.json --region ap-south-1
 revision=`aws ecs describe-task-definition --task-definition ai-insight-jenkins --region ap-south-1 | grep "revision" | tr -s " " | cut -d " " -f 3|tr ',' ' '`
-aws ecs update-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
+echo $revision
+#aws ecs update-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
+aws ecs create-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
