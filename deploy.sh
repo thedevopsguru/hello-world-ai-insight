@@ -11,5 +11,6 @@ echo "I am here"
 aws ecs register-task-definition --family ai-insight-jenkins --cli-input-json file://taskDefinition.json --region ap-south-1
 revision=`aws ecs describe-task-definition --task-definition ai-insight-jenkins --region ap-south-1 | grep "revision" | tr -s " " | cut -d " " -f 3|tr ',' ' '`
 echo $revision
+echo "2ND Reviosion line"
 #aws ecs update-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
-aws ecs create-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:${revision} --desired-count 1
+aws ecs create-service --cluster ai-insight-cluster --service ai-insight-service --task-definition ai-insight-jenkins:7 --desired-count 1
