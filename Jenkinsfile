@@ -28,6 +28,7 @@ environment {
         AWS_ECS_CLUSTER = 'ai-insight-cluster-demo'
         AWS_ECS_TASK_DEFINITION_PATH = 'template.json'
 }
+    stages {
 
 stage('Build & Test') {
   steps {
