@@ -12,7 +12,7 @@ pipeline {
 
 
 environment {
-        POM_VERSION = getVersion()
+        //POM_VERSION = getVersion()
         JAR_NAME = getJarName()
         AWS_ECR_REGION = 'ap-south-1'
         AWS_ECS_SERVICE = 'ai-insight-service'
@@ -38,7 +38,7 @@ stage('Build Docker Image') {
   steps {
     withCredentials([string(credentialsId: 'AWS_REPOSITORY_URL_SECRET', variable: '057320992418.dkr.ecr.ap-south-1.amazonaws.com')]) {
       script {
-        docker.build("${AWS_ECR_URL}:${POM_VERSION}", "--build-arg JAR_FILE=${JAR_NAME} .")
+        docker.build("${AWS_ECR_URL}:0.0.1-SNAPSHOT", "--build-arg JAR_FILE=${JAR_NAME} .")
       }
     }
   }
