@@ -10,7 +10,7 @@
             "memoryReservation": 128,
             "name": "ai-insight-jenkins",
             "mountPoints": [],
-            "image": "057320992418.dkr.ecr.ap-south-1.amazonaws.com/ai-insight-demo",
+            "image": "057320992418.dkr.ecr.ap-south-1.amazonaws.com/ai-insight-demo:1.0",
             "essential": true,
             "portMappings": [
                 {
